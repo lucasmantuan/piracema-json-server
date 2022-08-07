@@ -6,9 +6,6 @@ const port = process.env.PORT || 5000;
 
 const cors = require("cors");
 
-server.use(middlewares);
-server.use(router);
-
 server.use(
     cors({
         origin: true,
@@ -17,6 +14,9 @@ server.use(
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     })
 );
+
 server.options("*", cors());
+server.use(middlewares);
+server.use(router);
 
 server.listen(port, () => console.log("JSON Server is running in http://localhost:" + port));
