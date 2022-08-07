@@ -25,12 +25,9 @@ const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 5000;
 
-server.use(middlewares);
-
 server.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
-    // another common pattern
     // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
     res.setHeader(
@@ -40,5 +37,6 @@ server.use((req, res, next) => {
     next();
 });
 
+server.use(middlewares);
 server.use(router);
 server.listen(port, () => console.log("JSON Server is running in http://localhost:" + port));
