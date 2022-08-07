@@ -1,10 +1,11 @@
-const express = require("express");
-const app = express();
-const product = require("./api/product");
-
-app.use(express.json({ extended: false }));
-
-app.use("/api/product", product);
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+var jsonServer = require("json-server");
+// var db = require("./db.js");
+var server = jsonServer.create();
+var router = jsonServer.router("db.json");
+var middlewares = jsonServer.defaults();
+var port = process.env.PORT || 5000;
+server.use(middlewares);
+server.use(router);
+server.listen(port, function () {
+    console.log("JSON Server is running on http://localhost:" + port);
+});
