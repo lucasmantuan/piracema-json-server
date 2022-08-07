@@ -25,7 +25,9 @@ const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 5000;
 
-router.render = (req, res) => {
+server.use(middlewares);
+
+server.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
     // another common pattern
@@ -35,14 +37,8 @@ router.render = (req, res) => {
         'Access-Control-Allow-Headers',
         'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     )
-}
-
-server.use(middlewares);
-
-// server.use((req, res, next) => {
-//     res.header('Authorization', 'Bearer 2ee636c8-06b6-474b-b562-f1cde69ea575');
-//     next();
-// });
+    next();
+});
 
 server.use(router);
 server.listen(port, () => console.log("JSON Server is running in http://localhost:" + port));
