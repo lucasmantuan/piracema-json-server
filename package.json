@@ -1,7 +1,7 @@
 {
     "name": "piracema-json-server",
     "version": "1.0.0",
-    "description": "",
+    "description": "JSON Server Piracema",
     "main": "index.js",
     "scripts": {
         "start": "node index.js"
